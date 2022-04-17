@@ -5,7 +5,7 @@
 <style>
     .home-container{
         display: grid;
-        grid-template-columns: 1fr 3fr;
+        grid-template-columns: 1fr 3fr 1fr;
     }
 </style>
 
@@ -36,7 +36,7 @@
             {% if request.user == room.host %}
             <a href="{% url 'update-room' room.id %}">Edit</a>
             <a href="{% url 'delete-room' room.id %}">Delete</a>
-            {%endif%}
+            {% endif %}
             <span>@{{room.host.username}}</span>
             <h5>{{room.id}} =><a href="{% url 'room' room.id%}">  {{room.name}}</a> </h5>
             <samll>{{room.topic.name}}</samll>
@@ -46,7 +46,18 @@
     </div>
     </div>
 
-    
+    <div>
+        <h3>Recent Activity</h3>
+        <hr>
+        {%for message in room_messages%}
+            <div>
+                <small>@{{message.user}}  {{message.created|timesince}}</small>
+                <small>replied to "{{message.room}}"</small>
+                <p>{{message.body}}</p>
+            </div>
+        {%endfor%}
+    </div>
+
 </div>
 
 {%endblock%}
