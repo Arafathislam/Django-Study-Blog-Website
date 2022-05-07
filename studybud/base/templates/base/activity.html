@@ -1,8 +1,26 @@
-<div class="activities">
-    <div class="activities__header">
-        <h2>Recent Activities</h2>
-    </div>
-    {% for message in room_messages %}
+{%extends 'main.html'%}
+
+{%block content%}
+
+    <main class="layout">
+      <div class="container">
+        <div class="layout__box">
+          <div class="layout__boxHeader">
+            <div class="layout__boxTitle">
+              <a href="{%url 'home'%}">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                  <title>arrow-left</title>
+                  <path
+                    d="M13.723 2.286l-13.723 13.714 13.719 13.714 1.616-1.611-10.96-10.96h27.625v-2.286h-27.625l10.965-10.965-1.616-1.607z"
+                  ></path>
+                </svg>
+              </a>
+              <h3>Recent Activities</h3>
+            </div>
+          </div>
+
+          <div class="activities-page layout__body">
+            {% for message in room_messages %}
     <div class="activities__box">
         <div class="activities__boxHeader roomListRoom__header">
             <a href="{% url 'user-profile' message.user.id %}" class="roomListRoom__author">
@@ -36,12 +54,10 @@
     </div>
     {% endfor %}
 
-</div>
 
+          </div>
+        </div>
+      </div>
+    </main>
 
-
-
-
-
-
-
+{% endblock content%}
